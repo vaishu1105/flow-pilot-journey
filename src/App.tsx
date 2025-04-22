@@ -1,9 +1,10 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState, createContext } from "react";
 import BuyerLogin from "./pages/BuyerLogin";
 import VerifyOTP from "./pages/VerifyOTP";
 import CompleteProfile from "./pages/CompleteProfile";
@@ -12,9 +13,7 @@ import PostNewRequest from "./pages/PostNewRequest";
 import RequestDetails from "./pages/RequestDetails";
 import NotFound from "./pages/NotFound";
 import FarmerModuleRouter from "./pages/FarmerModuleRouter";
-import Module2Router from "./pages/Module2/Module2Router";
-
-import { createContext } from "react";
+// Removed Module2Router import
 
 export interface UserProfile {
   fullName: string;
@@ -37,6 +36,18 @@ export interface PurchaseRequest {
     location: string;
     rating: number;
   };
+}
+
+// Define UserContextType to fix missing type error
+export interface UserContextType {
+  phoneNumber: string;
+  setPhoneNumber: (phone: string) => void;
+  profileCompleted: boolean;
+  setProfileCompleted: (completed: boolean) => void;
+  userProfile: UserProfile | null;
+  setUserProfile: (profile: UserProfile | null) => void;
+  currentRequest: PurchaseRequest | null;
+  setCurrentRequest: (request: PurchaseRequest | null) => void;
 }
 
 export const UserContext = createContext<UserContextType>({
@@ -82,7 +93,7 @@ const App = () => {
               <Route path="/post-request" element={<PostNewRequest />} />
               <Route path="/request-details/:id" element={<RequestDetails />} />
               <Route path="/farmer/*" element={<FarmerModuleRouter />} />
-              <Route path="/module2/*" element={<Module2Router />} />
+              {/* Removed Module 2 route */}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
@@ -93,3 +104,4 @@ const App = () => {
 };
 
 export default App;
+
