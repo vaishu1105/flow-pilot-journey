@@ -12,21 +12,9 @@ import PostNewRequest from "./pages/PostNewRequest";
 import RequestDetails from "./pages/RequestDetails";
 import NotFound from "./pages/NotFound";
 import FarmerModuleRouter from "./pages/FarmerModuleRouter";
+import Module2Router from "./pages/Module2/Module2Router";
 
-// Create a Context to manage user state across the app
 import { createContext } from "react";
-
-// User context type definition
-interface UserContextType {
-  phoneNumber: string;
-  setPhoneNumber: (phone: string) => void;
-  profileCompleted: boolean;
-  setProfileCompleted: (completed: boolean) => void;
-  userProfile: UserProfile | null;
-  setUserProfile: (profile: UserProfile) => void;
-  currentRequest: PurchaseRequest | null;
-  setCurrentRequest: (request: PurchaseRequest | null) => void;
-}
 
 export interface UserProfile {
   fullName: string;
@@ -65,7 +53,6 @@ export const UserContext = createContext<UserContextType>({
 const queryClient = new QueryClient();
 
 const App = () => {
-  // Set up state for the user context
   const [phoneNumber, setPhoneNumber] = useState('');
   const [profileCompleted, setProfileCompleted] = useState(false);
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
@@ -95,6 +82,7 @@ const App = () => {
               <Route path="/post-request" element={<PostNewRequest />} />
               <Route path="/request-details/:id" element={<RequestDetails />} />
               <Route path="/farmer/*" element={<FarmerModuleRouter />} />
+              <Route path="/module2/*" element={<Module2Router />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
