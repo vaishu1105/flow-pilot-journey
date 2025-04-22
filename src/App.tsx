@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -12,8 +11,6 @@ import PurchaseRequests from "./pages/PurchaseRequests";
 import PostNewRequest from "./pages/PostNewRequest";
 import RequestDetails from "./pages/RequestDetails";
 import NotFound from "./pages/NotFound";
-import FarmerModuleRouter from "./pages/FarmerModuleRouter";
-// Removed Module2Router import
 
 export interface UserProfile {
   fullName: string;
@@ -38,7 +35,6 @@ export interface PurchaseRequest {
   };
 }
 
-// Define UserContextType to fix missing type error
 export interface UserContextType {
   phoneNumber: string;
   setPhoneNumber: (phone: string) => void;
@@ -92,8 +88,6 @@ const App = () => {
               <Route path="/purchase-requests" element={<PurchaseRequests />} />
               <Route path="/post-request" element={<PostNewRequest />} />
               <Route path="/request-details/:id" element={<RequestDetails />} />
-              <Route path="/farmer/*" element={<FarmerModuleRouter />} />
-              {/* Removed Module 2 route */}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
@@ -104,4 +98,3 @@ const App = () => {
 };
 
 export default App;
-
