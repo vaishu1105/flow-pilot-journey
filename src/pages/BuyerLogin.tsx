@@ -70,9 +70,14 @@ const BuyerLogin = () => {
         </div>
 
         <Button
-          className={`w-full ${phoneInput.length === 10 ? 'bg-green-500 hover:bg-green-600' : 'bg-gray-400'} text-white py-2 rounded-md flex items-center justify-center mb-4`}
           onClick={handleSendOTP}
           disabled={isLoading || phoneInput.length !== 10}
+          className={`w-full py-2 rounded-md flex items-center justify-center mb-4 ${
+            phoneInput.length === 10 
+              ? 'bg-green-500 hover:bg-green-600 text-white' 
+              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+          }`}
+          type="button"
         >
           {isLoading ? "Sending..." : (
             <>

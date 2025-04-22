@@ -146,8 +146,8 @@ const CompleteProfile = () => {
 
           <Button
             type="submit"
-            className="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-md flex items-center justify-center"
             disabled={isSubmitting}
+            className="w-full py-2 rounded-md flex items-center justify-center bg-green-500 hover:bg-green-600 text-white disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
           >
             {isSubmitting ? "Submitting..." : "Complete Profile"}
           </Button>

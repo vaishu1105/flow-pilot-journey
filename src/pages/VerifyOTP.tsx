@@ -118,9 +118,10 @@ const VerifyOTP = () => {
         </div>
 
         <Button
-          className="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-md flex items-center justify-center mb-4"
           onClick={handleVerifyOTP}
           disabled={isVerifying || otp.some(digit => !digit)}
+          className="w-full py-2 rounded-md flex items-center justify-center mb-4 bg-green-500 hover:bg-green-600 text-white disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+          type="button"
         >
           {isVerifying ? "Verifying..." : "Verify & Continue"}
         </Button>
