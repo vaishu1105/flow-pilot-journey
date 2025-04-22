@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 
 const BuyerLogin = () => {
   const { setPhoneNumber } = useContext(UserContext);
@@ -11,9 +12,14 @@ const BuyerLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+  const validatePhoneNumber = (phone: string) => {
+    const phoneRegex = /^[6-9]\d{9}$/;
+    return phoneRegex.test(phone);
+  };
+
   const handleSendOTP = () => {
-    // Validate phone number
-    if (phoneInput.length < 10) {
+    if (!validatePhoneNumber(phoneInput)) {
+      toast.error("Please enter a valid 10-digit phone number");
       return;
     }
 
@@ -22,8 +28,16 @@ const BuyerLogin = () => {
     setTimeout(() => {
       setPhoneNumber(phoneInput);
       setIsLoading(false);
+      toast.success("OTP sent successfully!");
       navigate("/verify-otp");
-    }, 1000);
+    }, 1500);
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\D/g, '');
+    if (value.length <= 10) {
+      setPhoneInput(value);
+    }
   };
 
   return (
@@ -49,16 +63,16 @@ const BuyerLogin = () => {
               placeholder="Enter phone number" 
               className="flex-1 border-none focus:ring-0"
               value={phoneInput}
-              onChange={(e) => setPhoneInput(e.target.value)}
+              onChange={handlePhoneChange}
               maxLength={10}
             />
           </div>
         </div>
 
         <Button
-          className="w-full bg-gray-400 hover:bg-gray-500 text-white py-2 rounded-md flex items-center justify-center mb-4"
+          className={`w-full ${phoneInput.length === 10 ? 'bg-green-500 hover:bg-green-600' : 'bg-gray-400'} text-white py-2 rounded-md flex items-center justify-center mb-4`}
           onClick={handleSendOTP}
-          disabled={isLoading || phoneInput.length < 10}
+          disabled={isLoading || phoneInput.length !== 10}
         >
           {isLoading ? "Sending..." : (
             <>
