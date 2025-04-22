@@ -11,6 +11,7 @@ import PurchaseRequests from "./pages/PurchaseRequests";
 import PostNewRequest from "./pages/PostNewRequest";
 import RequestDetails from "./pages/RequestDetails";
 import NotFound from "./pages/NotFound";
+import FarmerModuleRouter from "./pages/FarmerModuleRouter";
 
 // Create a Context to manage user state across the app
 import { createContext } from "react";
@@ -93,6 +94,7 @@ const App = () => {
               <Route path="/purchase-requests" element={<PurchaseRequests />} />
               <Route path="/post-request" element={<PostNewRequest />} />
               <Route path="/request-details/:id" element={<RequestDetails />} />
+              <Route path="/farmer/*" element={<FarmerModuleRouter />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
